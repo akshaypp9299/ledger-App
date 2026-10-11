@@ -1,0 +1,33 @@
+# Database is plain PostgreSQL via Flyway. To move clouds, change only DB_URL / DB_USER / DB_PASSWORD.
+# If DB_URL is unset we fall back to in-memory H2 (PostgreSQL mode) so the app runs with zero setup.
+spring:
+  application:
+    name: societyos-api
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:societyos;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1}
+    username: ${DB_USER:sa}
+    password: ${DB_PASSWORD:}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+
+server:
+  port: ${PORT:8080}
+
+societyos:
+  storage-dir: ${STORAGE_DIR:./storage}
+  cors-origins: ${CORS_ORIGINS:http://localhost:5173}
+  jwt:
+    # >= 32 chars. If unset a random secret is generated per start (tokens die on restart; fine for dev).
+    secret: ${JWT_SECRET:}
+    ttl-minutes: 480
+  seed:
+    enabled: ${SEED_ENABLED:true}
+    society-name: Shivranjan Towers
+    # If blank, a random password is generated and logged once at startup.
+    password: ${SEED_PASSWORD:}

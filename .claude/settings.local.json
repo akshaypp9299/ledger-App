@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn -v)",
+      "Bash(curl -sS -o api.zip \"https://start.spring.io/starter.zip?type=maven-project&language=java&javaVersion=21&groupId=com.societyos&artifactId=api&name=api&packageName=com.societyos&dependencies=web,validation,data-jpa,security,flyway,postgresql,h2\")",
+      "Bash(unzip -q -o api.zip -d api)",
+      "Bash(rm api.zip)",
+      "Bash(python -)",
+      "Bash(rm -f HELP.md)",
+      "Bash(./mvnw -q test)",
+      "Bash(npm i *)",
+      "Bash(rm -f src/data/mock.ts)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -sf http://localhost:8080/api/v1/health)",
+      "Bash(break)",
+      "Bash(SEED_PASSWORD=Demo-Pass-2026 bash scripts/demo-data.sh)"
+    ]
+  }
+}
